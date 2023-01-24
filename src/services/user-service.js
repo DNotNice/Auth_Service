@@ -17,6 +17,26 @@ const UserRepository  = require('../repository/user-repository');
                  throw error;
             }
         }
+        async signIn(email , plainPassword){
+                try {
+                    // step 1 - >fetch user using the email
+                    const user = await this.UserRepository.getByEmail(email);
+                    //step 2 -> compare passowords
+                    const passwordMatch = this.checkPassword(plainPassword , user.password)
+                    if(!passwordMatch) {
+                        console.log('password does not match');
+                        throw {error:"incorrect password"};
+
+                    }
+                    //step 3-> if passwords match , create a token and sent it to user
+                    const Newjwt = this.createToken({email : user.email , id:user.id});
+                    return Newjwt ;
+                    
+                } catch (error) {
+                    console.log('something went wrong in the sign in process');
+                    throw error;
+                }
+        }
          createToken(user)  {
           try {
             const result = jwt.sign(user , JWT_KEY,{expiresIn : '1d'});
