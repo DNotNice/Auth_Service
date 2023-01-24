@@ -45,4 +45,24 @@ const create = async (req, res) =>{
         })
     }
  }
-module.exports = {create, signIn}
+ const isAuthenticated = async(req, res) =>{
+try {
+    const token = req.headers['x-access-token']; 
+    const response = await userService.isAuthenticated(token);
+    return res.status(200).json({
+        success:true,
+        err:{},
+        data : response ,
+        message :"user is authenticated & token is valid"
+    })
+} catch (error) {
+    console.log(error);
+    res.status(500).json({
+        message:'something went wrong in the controller',
+        success:false ,
+        data:{},
+        err:error
+    })
+}
+ }
+module.exports = {create, signIn , isAuthenticated}

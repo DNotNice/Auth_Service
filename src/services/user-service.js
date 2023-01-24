@@ -63,6 +63,20 @@ const UserRepository  = require('../repository/user-repository');
                 throw error;
             }
         }
+        async isAuthenticated(token){
+            try {      
+            const isVerified = this.verifyToken(token);
+            if(!isVerified){
+            throw {error : 'invalid token'}
+            }
+            const user = this.UserRepository.getById(isVerified.id);
+            if(!user) throw {error : 'no user exists with this token'}
+            return user.id;     
+            } catch (error) {    
+                console.log('something went wrong in authentication');
+                throw error;
+            }
+        }
     }
 
     module.exports = UserService;
