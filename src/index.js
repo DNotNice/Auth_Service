@@ -14,7 +14,8 @@ const prepareAndStartServer = ()=>{
   app.use('/api',apiroutes)
 
   app.listen(PORT ,async ()=>{
-    console.log('Server started on port',PORT); 
+    console.log('Server started on port',PORT);
+   
     // const incomingpassowrd = '12345789'
     // const user = await User.findByPk(3);
     // const response = bcrypt.compareSync(incomingpassowrd , user.password);
