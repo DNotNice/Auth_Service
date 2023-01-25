@@ -39,7 +39,7 @@ const UserRepository  = require('../repository/user-repository');
         }
          createToken(user)  {
           try {
-            const result = jwt.sign(user , JWT_KEY,{expiresIn : '1d'});
+            const result = jwt.sign(user , JWT_KEY,{expiresIn : '4d'});
             return result 
           } catch (error) {
             console.log('something went wrong in token creation');
