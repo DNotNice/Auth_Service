@@ -65,4 +65,23 @@ try {
     })
 }
  }
-module.exports = {create, signIn , isAuthenticated}
+ const isAdmin = async (req, res) =>{
+    try {
+        const response = await userService.isAdmin(req.body.id);
+        return res.status(200).json({
+            success:true,
+            err:{},
+            data : response ,
+            message :"successfully fetched whether user is admin or not"
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            message:'something went wrong in the controller',
+            success:false ,
+            data:{},
+            err:{error}
+        })
+    }
+ }
+module.exports = {create, signIn , isAuthenticated , isAdmin     }

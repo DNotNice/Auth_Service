@@ -77,6 +77,14 @@ const UserRepository  = require('../repository/user-repository');
                 throw error;
             }
         }
+        async isAdmin(userId){
+            try {
+                return this.UserRepository.isAdmin(userId);
+            } catch (error) {
+                console.log('error in admin detection');
+                throw {error};
+            }
+        }
     }
 
     module.exports = UserService;
