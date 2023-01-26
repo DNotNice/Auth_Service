@@ -35,6 +35,9 @@ const AppErrors = require('../utils/error-handler');
                     return Newjwt ;
                     
                 } catch (error) {
+                    if(error.name == 'AttributeNotFound'){
+                        throw error;
+                    }
                     console.log('something went wrong in the sign in process');
                     throw error;
                 }

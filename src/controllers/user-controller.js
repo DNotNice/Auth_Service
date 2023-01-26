@@ -36,11 +36,11 @@ const create = async (req, res) =>{
         })
     } catch (error) {
         console.log(error);
-        res.status(500).json({
-            message:'something went wrong',
+        res.status(error.statusCode).json({
+            message:error.message,
             success:false ,
             data:{},
-            err:error
+            err:error.explanation
         })
     }
  }
